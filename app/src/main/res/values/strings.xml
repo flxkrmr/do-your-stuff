@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Do Your Stuff</string>
+    <string name="profile_settings">Profiles</string>
+    <string name="title_activity_profile_management">Profiles</string>
+    <string name="button_time_start">Start</string>
+    <string name="button_time_stop">Stop</string>
+    <string name="button_time_start_at">Start at</string>
+    <string name="button_time_stop_at">Stop at</string>
+    <string name="label_time_goal_today">Goal today:</string>
+    <string name="label_active_profile">Active Profile:</string>
+</resources>

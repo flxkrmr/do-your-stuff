@@ -1,4 +1,4 @@
-package com.example.doyourstuff.database;
+package com.example.doyourstuff.measuretimeevent;
 
 import java.util.Date;
 
@@ -8,14 +8,14 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class MeasuringTime {
-    public MeasuringTime(final int uid, @NonNull final String date, final boolean isStartEvent) {
+public class MeasureTimeEvent {
+    public MeasureTimeEvent(final int uid, @NonNull final String date, final boolean isStartEvent) {
         this.uid = uid;
         this.date = date;
         this.isStartEvent = isStartEvent;
     }
 
-    private MeasuringTime(final Date date, final boolean isStartEvent) {
+    private MeasureTimeEvent(final Date date, final boolean isStartEvent) {
         this.date = date.toString();
         this.isStartEvent = isStartEvent;
     }
@@ -42,11 +42,11 @@ public class MeasuringTime {
         return isStartEvent;
     }
 
-    public static MeasuringTime stopEvent(final Date date) {
-        return new MeasuringTime(date, false);
+    public static MeasureTimeEvent stopEvent(final Date date) {
+        return new MeasureTimeEvent(date, false);
     }
 
-    public static MeasuringTime startEvent(final Date date) {
-        return new MeasuringTime(date, true);
+    public static MeasureTimeEvent startEvent(final Date date) {
+        return new MeasureTimeEvent(date, true);
     }
 }

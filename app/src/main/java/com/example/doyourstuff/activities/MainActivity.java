@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,8 +17,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.doyourstuff.R;
-import com.example.doyourstuff.database.MeasuringTime;
-import com.example.doyourstuff.database.MeasuringTimeViewModel;
+import com.example.doyourstuff.measuretimeevent.MeasureTimeEvent;
+import com.example.doyourstuff.measuretimeevent.MeasureTimeEventViewModel;
 
 import java.util.Date;
 import java.util.List;
@@ -28,7 +27,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private static final String STATE_MEASURING_TIME = "measuringTime";
     private final MutableLiveData<Boolean> measuringTime = new MutableLiveData<>();
-    private MeasuringTimeViewModel viewModel;
+    private MeasureTimeEventViewModel viewModel;
 
     private final class MeasuringTimeStateObserver implements Observer<Boolean> {
         @Override
@@ -60,10 +59,10 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        viewModel = ViewModelProviders.of(this).get(MeasuringTimeViewModel.class);
-        viewModel.getAllEntries().observe(this, new Observer<List<MeasuringTime>>() {
+        viewModel = ViewModelProviders.of(this).get(MeasureTimeEventViewModel.class);
+        viewModel.getAllEntries().observe(this, new Observer<List<MeasureTimeEvent>>() {
             @Override
-            public void onChanged(List<MeasuringTime> events) {
+            public void onChanged(List<MeasureTimeEvent> events) {
                 adapter.setEvents(events);
             }
         });
@@ -95,9 +94,9 @@ public class MainActivity extends AppCompatActivity {
         final boolean currentlyMeasuring = getMeasuringTimeOrFalse();
 
         if(currentlyMeasuring)
-            viewModel.insert(MeasuringTime.stopEvent(new Date()));
+            viewModel.insert(MeasureTimeEvent.stopEvent(new Date()));
         else
-            viewModel.insert(MeasuringTime.startEvent(new Date()));
+            viewModel.insert(MeasureTimeEvent.startEvent(new Date()));
 
         toggleMeasuringTime();
     }

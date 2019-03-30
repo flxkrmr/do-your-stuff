@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.doyourstuff.R;
-import com.example.doyourstuff.database.MeasuringTime;
+import com.example.doyourstuff.measuretimeevent.MeasureTimeEvent;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class EventViewAdapter extends RecyclerView.Adapter<EventViewAdapter.Even
     }
 
     private final LayoutInflater inflater;
-    private List<MeasuringTime> events;
+    private List<MeasureTimeEvent> events;
 
     public EventViewAdapter(final Context context) {
         inflater = LayoutInflater.from(context);
@@ -42,7 +42,7 @@ public class EventViewAdapter extends RecyclerView.Adapter<EventViewAdapter.Even
     @Override
     public void onBindViewHolder(@NonNull EventViewHolder holder, int position) {
         if (events != null) {
-            MeasuringTime current = events.get(position);
+            MeasureTimeEvent current = events.get(position);
             holder.eventItemView.setText(current.getDate());
         } else {
             // Covers the case of data not being ready yet.
@@ -50,7 +50,7 @@ public class EventViewAdapter extends RecyclerView.Adapter<EventViewAdapter.Even
         }
     }
 
-    public void setEvents(List<MeasuringTime> events) {
+    public void setEvents(List<MeasureTimeEvent> events) {
         this.events = events;
         notifyDataSetChanged();
     }

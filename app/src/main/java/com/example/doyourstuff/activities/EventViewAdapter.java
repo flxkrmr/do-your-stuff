@@ -1,5 +1,6 @@
 package com.example.doyourstuff.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +10,14 @@ import android.widget.TextView;
 import com.example.doyourstuff.R;
 import com.example.doyourstuff.data.TimeMeasurement;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class EventViewAdapter extends RecyclerView.Adapter<EventViewAdapter.EventViewHolder> {
@@ -25,8 +31,22 @@ public class EventViewAdapter extends RecyclerView.Adapter<EventViewAdapter.Even
         }
     }
 
+
     private final LayoutInflater inflater;
     private List<TimeMeasurement> timeMeasurements;
+
+    @SuppressLint("SimpleDateFormat")
+    private String datesToString(Date date1, @Nullable Date date2) {
+        final DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+        String output = formatter.format(date1);
+        if(date2 == null)
+            return output;
+
+        output += "  -  ";
+        output += formatter.format(date2);
+
+        return output;
+    }
 
     public EventViewAdapter(final Context context) {
         inflater = LayoutInflater.from(context);
@@ -43,7 +63,7 @@ public class EventViewAdapter extends RecyclerView.Adapter<EventViewAdapter.Even
     public void onBindViewHolder(@NonNull EventViewHolder holder, int position) {
         if (timeMeasurements != null) {
             TimeMeasurement current = timeMeasurements.get(position);
-            holder.eventItemView.setText(current.getStartDate().toString());
+            holder.eventItemView.setText(datesToString(current.getStartDate(), current.getStopDate()));
         } else {
             // Covers the case of data not being ready yet.
             holder.eventItemView.setText("Nothing here");

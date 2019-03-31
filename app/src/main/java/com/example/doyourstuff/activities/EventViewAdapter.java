@@ -43,7 +43,7 @@ public class EventViewAdapter extends RecyclerView.Adapter<EventViewAdapter.Even
     public void onBindViewHolder(@NonNull EventViewHolder holder, int position) {
         if (events != null) {
             MeasureTimeEvent current = events.get(position);
-            holder.eventItemView.setText(current.getDate());
+            holder.eventItemView.setText(current.getDate().toString());
         } else {
             // Covers the case of data not being ready yet.
             holder.eventItemView.setText("Nothing here");

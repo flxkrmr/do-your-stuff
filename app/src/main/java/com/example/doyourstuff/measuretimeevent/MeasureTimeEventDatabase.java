@@ -5,8 +5,10 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 @Database(entities = {MeasureTimeEvent.class}, version = 1)
+@TypeConverters({DataConverters.class})
 abstract class MeasureTimeEventDatabase extends RoomDatabase {
     abstract MeasureTimeEventDao newMeasuringTimeDao();
 

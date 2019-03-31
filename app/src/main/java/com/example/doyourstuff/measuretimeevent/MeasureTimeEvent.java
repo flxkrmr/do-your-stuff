@@ -9,14 +9,14 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class MeasureTimeEvent {
-    public MeasureTimeEvent(final int uid, @NonNull final String date, final boolean isStartEvent) {
+    public MeasureTimeEvent(final int uid, @NonNull final Date date, final boolean isStartEvent) {
         this.uid = uid;
         this.date = date;
         this.isStartEvent = isStartEvent;
     }
 
     private MeasureTimeEvent(final Date date, final boolean isStartEvent) {
-        this.date = date.toString();
+        this.date = date;
         this.isStartEvent = isStartEvent;
     }
 
@@ -25,7 +25,7 @@ public class MeasureTimeEvent {
 
     @NonNull
     @ColumnInfo(name = "date")
-    private String date;
+    private Date date;
 
     @ColumnInfo(name = "is_start_event")
     private boolean isStartEvent;
@@ -34,7 +34,7 @@ public class MeasureTimeEvent {
         return uid;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 

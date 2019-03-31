@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.doyourstuff.R;
-import com.example.doyourstuff.measuretimeevent.MeasureTimeEvent;
+import com.example.doyourstuff.data.TimeMeasurement;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class EventViewAdapter extends RecyclerView.Adapter<EventViewAdapter.Even
     }
 
     private final LayoutInflater inflater;
-    private List<MeasureTimeEvent> events;
+    private List<TimeMeasurement> timeMeasurements;
 
     public EventViewAdapter(final Context context) {
         inflater = LayoutInflater.from(context);
@@ -41,23 +41,23 @@ public class EventViewAdapter extends RecyclerView.Adapter<EventViewAdapter.Even
 
     @Override
     public void onBindViewHolder(@NonNull EventViewHolder holder, int position) {
-        if (events != null) {
-            MeasureTimeEvent current = events.get(position);
-            holder.eventItemView.setText(current.getDate().toString());
+        if (timeMeasurements != null) {
+            TimeMeasurement current = timeMeasurements.get(position);
+            holder.eventItemView.setText(current.getStartDate().toString());
         } else {
             // Covers the case of data not being ready yet.
             holder.eventItemView.setText("Nothing here");
         }
     }
 
-    public void setEvents(List<MeasureTimeEvent> events) {
-        this.events = events;
+    public void setTimeMeasurements(List<TimeMeasurement> timeMeasurements) {
+        this.timeMeasurements = timeMeasurements;
         notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return events != null ? events.size() : 0;
+        return timeMeasurements != null ? timeMeasurements.size() : 0;
     }
 
 

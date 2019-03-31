@@ -1,4 +1,4 @@
-package com.example.doyourstuff.measuretimeevent;
+package com.example.doyourstuff.data;
 
 import java.util.Date;
 

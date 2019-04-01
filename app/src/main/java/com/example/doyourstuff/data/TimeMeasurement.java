@@ -1,5 +1,7 @@
 package com.example.doyourstuff.data;
 
+import org.threeten.bp.LocalDateTime;
+
 import java.util.Date;
 
 import androidx.annotation.NonNull;
@@ -14,12 +16,12 @@ public class TimeMeasurement {
 
     @NonNull
     @ColumnInfo(name = "start_date")
-    private Date startDate;
+    private LocalDateTime startDate;
 
     @ColumnInfo(name = "stop_date")
-    private Date stopDate;
+    private LocalDateTime stopDate;
 
-    public TimeMeasurement(int uid, @NonNull Date startDate, Date stopDate) {
+    public TimeMeasurement(int uid, @NonNull LocalDateTime startDate, LocalDateTime stopDate) {
         this.uid = uid;
         this.startDate = startDate;
         this.stopDate = stopDate;
@@ -30,11 +32,11 @@ public class TimeMeasurement {
     }
 
     @NonNull
-    public Date getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
-    public Date getStopDate() {
+    public LocalDateTime getStopDate() {
         return stopDate;
     }
 

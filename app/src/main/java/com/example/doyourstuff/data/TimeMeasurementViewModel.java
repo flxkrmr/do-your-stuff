@@ -2,6 +2,8 @@ package com.example.doyourstuff.data;
 
 import android.app.Application;
 
+import org.threeten.bp.LocalDateTime;
+
 import java.util.Date;
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class TimeMeasurementViewModel extends AndroidViewModel {
     }
 
     public void startMeasurement() {
-        final TimeMeasurement measurement = new TimeMeasurement(0, new Date(), null);
+        final TimeMeasurement measurement = new TimeMeasurement(0, LocalDateTime.now(), null);
         repository.insertMeasurement(measurement);
     }
 
@@ -34,7 +36,7 @@ public class TimeMeasurementViewModel extends AndroidViewModel {
 
     public void stopMeasurement(final TimeMeasurement measurement) {
         final TimeMeasurement measurementWithStopTime =
-                new TimeMeasurement(measurement.getUid(), measurement.getStartDate(), new Date());
+                new TimeMeasurement(measurement.getUid(), measurement.getStartDate(), LocalDateTime.now());
         repository.updateMeasurement(measurementWithStopTime);
     }
 }

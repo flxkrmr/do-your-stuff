@@ -1,7 +1,6 @@
 package com.example.doyourstuff.activities;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,8 +18,10 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.doyourstuff.R;
+import com.example.doyourstuff.data.ScheduledTimeMeasuring;
 import com.example.doyourstuff.data.TimeMeasurement;
 import com.example.doyourstuff.data.TimeMeasurementViewModel;
+import com.jakewharton.threetenabp.AndroidThreeTen;
 
 import java.util.List;
 
@@ -62,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        AndroidThreeTen.init(this);
 
         timeMeasurementGuiState.observe(this, new TimeMeasurementStateObserver());
         timeMeasurementGuiState.setValue(false);

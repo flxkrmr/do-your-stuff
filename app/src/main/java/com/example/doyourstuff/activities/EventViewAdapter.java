@@ -10,9 +10,11 @@ import android.widget.TextView;
 import com.example.doyourstuff.R;
 import com.example.doyourstuff.data.TimeMeasurement;
 
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.format.DateTimeFormatter;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -36,8 +38,8 @@ public class EventViewAdapter extends RecyclerView.Adapter<EventViewAdapter.Even
     private List<TimeMeasurement> timeMeasurements;
 
     @SuppressLint("SimpleDateFormat")
-    private String datesToString(Date date1, @Nullable Date date2) {
-        final DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+    private String datesToString(LocalDateTime date1, @Nullable LocalDateTime date2) {
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         String output = formatter.format(date1);
         if(date2 == null)
             return output;

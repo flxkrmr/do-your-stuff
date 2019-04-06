@@ -49,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private final class TimeMeasurementBlockObserver implements Observer<Boolean> {
+    private final class
+    TimeMeasurementBlockObserver implements Observer<Boolean> {
         @Override
         public void onChanged(Boolean block) {
             findViewById(R.id.buttonStartStop).setEnabled(!block);

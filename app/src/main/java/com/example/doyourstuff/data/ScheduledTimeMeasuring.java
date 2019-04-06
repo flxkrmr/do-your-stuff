@@ -1,5 +1,6 @@
 package com.example.doyourstuff.data;
 
+import org.threeten.bp.Duration;
 import org.threeten.bp.LocalDateTime;
 
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -9,29 +10,32 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 public class ScheduledTimeMeasuring {
-    private final LocalDateTime startTime;
 
-    private final LiveData<Long> measuredTime = new MutableLiveData<>();
+    private final MutableLiveData<Duration> measuredTimeObservable = new MutableLiveData<>();
 
     private final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(2);
 
-    private final Runnable measuringTask = new Runnable() {
-        @Override
-        public void run() {
-            // TODO use JODA library to measure the difference and set measuredTime
-        }
-    };
+    public ScheduledTimeMeasuring(final LocalDateTime startTime, Duration publishInterval) {
+        final Runnable measuringTask = new Runnable() {
+            @Override
+            public void run() {
+                final Duration measuredTime = Duration.between(startTime, LocalDateTime.now());
+                measuredTimeObservable.postValue(measuredTime);
+            }
+        };
 
-    public ScheduledTimeMeasuring(LocalDateTime startTime, long publishInterval, TimeUnit timeUnit) {
-        this.startTime = startTime;
-        executor.schedule(measuringTask, publishInterval, timeUnit);
+        executor.scheduleAtFixedRate(measuringTask, 0, publishInterval.toNanos(), TimeUnit.NANOSECONDS);
     }
 
     public void dispose() {
         executor.shutdown();
     }
 
-    public LiveData<Long> getMeasuredTime() {
-        return measuredTime;
+    boolean isShutdown() {
+        return executor.isShutdown();
+    }
+
+    public LiveData<Duration> getMeasuredTime() {
+        return measuredTimeObservable;
     }
 }

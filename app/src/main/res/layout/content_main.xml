@@ -86,7 +86,7 @@
             tools:listitem="@layout/eventview_item" />
 
         <ProgressBar
-            android:id="@+id/progressBar"
+            android:id="@+id/goalProgressBar"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
